@@ -1,7 +1,7 @@
 _base_ = [
-    '/ws/external/configs/_base_/models/faster_rcnn_r50_fpn.py',
-    '/ws/external/configs/_base_/datasets/cityscapes_detection.py',
-    '/ws/external/configs/_base_/default_runtime.py'
+    '/home/intern/minkyoung/OA-DG/configs/_base_/models/faster_rcnn_r50_fpn.py',
+    '/home/intern/minkyoung/OA-DG/configs/_base_/datasets/cityscapes_detection.py',
+    '/home/intern/minkyoung/OA-DG/configs/_base_/default_runtime.py'
 ]
 
 
@@ -24,7 +24,7 @@ model = dict(
 ###############
 ### DATASET ###
 ###############
-data = dict(samples_per_gpu=2, workers_per_gpu=4)
+data = dict(samples_per_gpu=1, workers_per_gpu=2)
 
 ################
 ### RUN TIME ###

@@ -7,7 +7,6 @@ from mmdet.core import eval_map, eval_recalls
 from .builder import DATASETS
 from .xml_style import XMLDataset
 
-
 @DATASETS.register_module()
 class SdgodDataset(XMLDataset):
 
@@ -15,7 +14,7 @@ class SdgodDataset(XMLDataset):
     #            'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse',
     #            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train',
     #            'tvmonitor')
-    CLASSES = ('bus', 'bike', 'car', 'motor', 'person', 'rider', 'truck')
+    CLASSES = ('person','car', 'truck', 'bus', 'motor', 'bike','bicycle')
 
     def __init__(self, **kwargs):
         super(SdgodDataset, self).__init__(**kwargs)
@@ -65,7 +64,7 @@ class SdgodDataset(XMLDataset):
         if metric == 'mAP':
             assert isinstance(iou_thrs, list)
             if self.year == 2007:
-                ds_name = 'voc07'
+                ds_name = 'VOC2007'
             else:
                 ds_name = self.CLASSES
             mean_aps = []

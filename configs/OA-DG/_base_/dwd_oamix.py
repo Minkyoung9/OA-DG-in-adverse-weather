@@ -1,5 +1,5 @@
 _base_ = [
-    '/ws/external/configs/_base_/datasets/s-dgod.py',
+    '/home/intern/minkyoung/OA-DG/configs/_base_/datasets/s-dgod.py',
 ]
 
 oamix_config=dict(

@@ -1,7 +1,7 @@
 _base_ = [
-    '/ws/external/configs/_base_/models/faster_rcnn_r50_caffe_dc5.py',
-    '/ws/external/configs/_base_/datasets/s-dgod.py',
-    '/ws/external/configs/_base_/default_runtime.py'
+    '/home/intern/minkyoung/OA-DG/configs/_base_/models/faster_rcnn_r50_caffe_dc5.py',
+    '/home/intern/minkyoung/OA-DG/configs/_base_/datasets/s-dgod.py',
+    '/home/intern/minkyoung/OA-DG/configs/_base_/default_runtime.py'
 ]
 model = dict(
     backbone=dict(

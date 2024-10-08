@@ -1,5 +1,5 @@
 _base_ = [
-    '/ws/external/configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes.py'
+    './configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes.py'
 ]
 
 oamix_config=dict(

@@ -180,56 +180,58 @@ def supcontrast(logits_clean, labels=None, num_views=2, lambda_weight=0.1, tempe
         mask_anchor_except_eye: same target except self-case
         mask_anchor_fg: same fg target except self-case
         mask_contrast_except_eye: all except self-case
-
     """
-
+    
     device = logits_clean.device
     batch_size = logits_clean.size()[0]
 
     assert num_views == 2, "Only num_views 2 and batch_size 2 case are supported."
-    ori_size = 512 * num_views   # 1024
-    rp_total_size = batch_size % ori_size  # num_proposals
-    rp_size = rp_total_size // num_views     # num proposals 10 case, num_view 2, batch_size 2 -> rp_size 20
+    
+    ori_size = logits_clean.size(0) // num_views  # batch_size에 맞춰 ori_size 조정
+    rp_total_size = batch_size % ori_size
+    rp_size = rp_total_size // num_views  # num proposals 10 case, num_view 2, batch_size 2 -> rp_size 20
 
-    targets = labels
-    targets = targets.contiguous().view(-1, 1)
+    # mask_eye_ori와 mask_eye_rp를 ori_size에 맞춰서 설정
+    mask_eye_ori = torch.eye(ori_size, dtype=torch.float32).to(device)
+    mask_eye_rp = torch.eye(rp_size, dtype=torch.float32).to(device)
 
+    targets = labels.contiguous().view(-1, 1)
     inds, _ = (targets != targets.max()).nonzero(as_tuple=True)
 
     fg = (targets != targets.max()).float()
     bg = (targets == targets.max()).float()
     mask_bg = torch.matmul(bg, bg.T)
     mask_same_instance = torch.zeros([batch_size, batch_size], dtype=torch.float32).to(device)
-    mask_eye_ori = torch.eye(ori_size, dtype=torch.float32).to(device)
-    mask_eye_rp = torch.eye(rp_size, dtype=torch.float32).to(device)
+
+    # 기존 코드를 유지하며, ori_size와 rp_size를 활용하여 인덱스 지정
     mask_same_instance[:ori_size, ori_size:ori_size*2] = mask_eye_ori
     mask_same_instance[ori_size:ori_size*2, :ori_size] = mask_eye_ori
     mask_same_instance[ori_size*2+rp_size:ori_size*2+rp_size*2, ori_size*2:ori_size*2+rp_size] = mask_eye_rp
     mask_same_instance[ori_size*2:ori_size*2+rp_size, ori_size*2+rp_size:ori_size*2+rp_size*2] = mask_eye_rp
+
     mask_anchor_bg = mask_same_instance * mask_bg
 
     if inds.size(0) > min_samples:
-
         mask_fg = torch.matmul(fg, fg.T)
         mask_eye = torch.eye(batch_size, dtype=torch.float32).to(device)
-        mask_anchor = torch.eq(targets, targets.T).float()  # [B, B]
+        mask_anchor = torch.eq(targets, targets.T).float()
         mask_anchor_except_eye = mask_anchor - mask_eye
 
         mask_anchor_fg = mask_anchor_except_eye * mask_fg
         mask_anchor = mask_anchor_fg + mask_anchor_bg
         mask_anchor = mask_anchor.detach()
 
-        assert ((mask_anchor!=0)&(mask_anchor!=1)).float().sum().item() == 0, "mask_anchor error"
+        assert ((mask_anchor != 0) & (mask_anchor != 1)).float().sum().item() == 0, "mask_anchor error"
         mask_contrast = torch.ones([batch_size, batch_size], dtype=torch.float32).to(device)
         mask_contrast_except_eye = mask_contrast - mask_eye
         mask_contrast_except_eye = mask_contrast_except_eye.detach()
 
-        loss = supcontrast_mask(logits_clean, logits_clean, targets,
-                                mask_anchor, mask_contrast_except_eye, lambda_weight, temper)
+        loss = supcontrast_mask(logits_clean, logits_clean, targets, mask_anchor, mask_contrast_except_eye, lambda_weight, temper)
     else:
         loss = torch.tensor(0., device=device, dtype=torch.float32)
 
     return loss
+
 
 def supcontrast_yolo(logits_clean, labels=None, num_views=2, lambda_weight=0.1, temper=0.07, min_samples=10):
    """

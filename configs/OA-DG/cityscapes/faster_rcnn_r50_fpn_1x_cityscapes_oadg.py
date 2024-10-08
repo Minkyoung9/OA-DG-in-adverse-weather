@@ -1,6 +1,7 @@
 _base_ = [
-    '/ws/external/configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes.py',
+    '/home/intern/minkyoung/OA-DG/configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes.py',
 ]
+
 
 num_views = 2
 
