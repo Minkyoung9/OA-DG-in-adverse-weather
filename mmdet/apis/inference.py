@@ -1,6 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
-
+import matplotlib.pyplot as plt
 import mmcv
 import numpy as np
 import torch
@@ -214,7 +214,8 @@ def show_result_pyplot(model,
                        result,
                        score_thr=0.3,
                        title='result',
-                       wait_time=0):
+                       wait_time=0,
+                       out_file=None):  # out_file을 추가로 인자로 받음
     """Visualize the detection results on the image.
 
     Args:
@@ -226,15 +227,26 @@ def show_result_pyplot(model,
         title (str): Title of the pyplot figure.
         wait_time (float): Value of waitKey param.
                 Default: 0.
+        out_file (str, optional): If specified, the result will be saved to this path.
     """
     if hasattr(model, 'module'):
         model = model.module
-    model.show_result(
+    result_image = model.show_result(
         img,
         result,
         score_thr=score_thr,
-        show=True,
+        show=False,
         wait_time=wait_time,
         win_name=title,
         bbox_color=(72, 101, 241),
         text_color=(72, 101, 241))
+    
+    plt.imshow(result_image)
+    plt.axis('off')
+
+    if out_file:  # out_file이 지정되었으면 저장
+        plt.savefig(out_file, bbox_inches='tight', pad_inches=0)
+    else:
+        plt.show()  # out_file이 없으면 화면에 출력
+
+    plt.close()
