@@ -1,4 +1,6 @@
 # Object Detection in adverse weather
+This project is based on the following GitHub:
+[GitHub - WoojuLee24/OA-DG](https://github.com/WoojuLee24/OA-DG?tab=readme-ov-file)
 
 ## OA-DG Method Summary
 **Object-Aware Domain Generalization**\
@@ -26,5 +28,4 @@ Used classes -> ('person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle'
 ---
 ## Reference
 [GitHub - AmingWu/Single-DGOD](https://github.com/AmingWu/Single-DGOD)\
-[GitHub - WoojuLee24/OA-DG](https://github.com/WoojuLee24/OA-DG?tab=readme-ov-file)\
 [OA-DG Paper](https://arxiv.org/pdf/2312.12133v1)
