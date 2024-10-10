@@ -1,7 +1,6 @@
 # Object Detection in adverse weather
 > 📢 This project is based on the following GitHub:
-
-[GitHub - WoojuLee24/OA-DG](https://github.com/WoojuLee24/OA-DG?tab=readme-ov-file)
+> [GitHub - WoojuLee24/OA-DG](https://github.com/WoojuLee24/OA-DG?tab=readme-ov-file)
 
 ## OA-DG Method Summary
 **Object-Aware Domain Generalization**\
