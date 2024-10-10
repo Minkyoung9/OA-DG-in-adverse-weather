@@ -2,9 +2,9 @@
 
 ## OA-DG Method Summary
 **Object-Aware Domain Generalization**
-Type: Single Domain
-Model : Faster R-CNN (2-stage Detector)
-Method : Image augmentation, Domain Generalization
+Type: Single Domain\
+Model : Faster R-CNN (2-stage Detector)\
+Method : Image augmentation, Domain Generalization\
 Dataset : DWD, Cityscapes
 
 ### Train
