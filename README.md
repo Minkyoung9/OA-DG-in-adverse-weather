@@ -17,6 +17,8 @@ Dataset : DWD, Cityscapes
 
 
 **Cityscapes dataset**
+
+
 Used classes -> ('person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle','bicycle')
 
     python -u tools/train.py configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg.py --work-dir /home/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg/exp2
