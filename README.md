@@ -5,7 +5,7 @@
 ## OA-DG Method Summary
 **Object-Aware Domain Generalization**\
 Type: Single Domain\
-Model : Faster R-CNN (2-stage Detector)\
+Base Model : Faster R-CNN (2-stage Detector) with ResNet-101 backbone\
 Method : Image augmentation, Domain Generalization\
 Dataset : DWD, Cityscapes
   - [Cityscapes](https://www.cityscapes-dataset.com/): A dataset that contains urban street scenes from 50 cities with detailed annotations.
