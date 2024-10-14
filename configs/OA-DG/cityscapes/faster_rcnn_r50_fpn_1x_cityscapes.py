@@ -12,7 +12,7 @@ model = dict(
     backbone=dict(init_cfg=None),
     roi_head=dict(
         bbox_head=dict(
-            num_classes=8,
+            num_classes=6,
             loss_bbox=dict(type='SmoothL1Loss', beta=1.0, loss_weight=1.0))),
     train_cfg=dict(
         rcnn=dict(dropout=False),

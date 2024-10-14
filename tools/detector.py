@@ -12,7 +12,7 @@ def parse_args():
     parser.add_argument(
         '--device', default='cuda:4', help='Device used for inference')
     parser.add_argument(
-        '--score-thr', type=float, default=0.3, help='bbox score threshold')
+        '--score-thr', type=float, default=0.4, help='bbox score threshold')
     parser.add_argument(
         '--async-test',
         action='store_true',

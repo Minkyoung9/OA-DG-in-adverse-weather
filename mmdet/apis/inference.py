@@ -130,9 +130,23 @@ def inference_detector(model, imgs):
         datas.append(data)
 
     data = collate(datas, samples_per_gpu=len(imgs))
+
+    from mmcv.parallel import DataContainer as DC
     # just get the actual data from DataContainer
-    data['img_metas'] = [img_metas.data[0] for img_metas in data['img_metas']]
-    data['img'] = [img.data[0] for img in data['img']]
+    if isinstance(data['img_metas'], DC):
+        # If already wrapped as DataContainer, just extract the first element
+        data['img_metas'] = [data['img_metas'].data[0]]
+    else:
+        # If it's a list, process each item
+        data['img_metas'] = [img_metas.data[0] for img_metas in data['img_metas']]
+
+    if isinstance(data['img'], DC):
+        # If already wrapped as DataContainer, just extract the first element
+        data['img'] = [data['img'].data[0]]
+    else:
+        # If it's a list, process each item
+        data['img'] = [img.data[0] for img in data['img']]
+
     if next(model.parameters()).is_cuda:
         # scatter to specified GPU
         data = scatter(data, [device])[0]

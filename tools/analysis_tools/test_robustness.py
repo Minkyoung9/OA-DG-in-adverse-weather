@@ -417,6 +417,14 @@ def main():
                 dataset='voc',
                 prints=prints,
                 aggregate=aggregate)
+        
+        elif cfg.dataset_type == 'CityscapesDataset':
+            get_results(
+                eval_results_filename,
+                dataset='cityscapes',
+                prints=prints,
+                aggregate=aggregate)
+        
         else:
             get_results(
                 eval_results_filename,

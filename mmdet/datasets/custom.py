@@ -92,7 +92,8 @@ class CustomDataset(Dataset):
 
         if self.picked_label is not None:
             import json
-            CLASSES = ['person','car', 'truck', 'bus', 'motor', 'bike','bicycle']
+            CLASSES = ['person', 'car', 'truck', 'bus', 'motorcycle', 'bicycle']
+            #CLASSES = ['person','car', 'truck', 'bus', 'motor', 'bike','bicycle']
             data_new = dict()
             categories, annotations = [], []
             with open(self.ann_file, 'r') as file:
