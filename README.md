@@ -28,7 +28,7 @@ Used classes -> ('person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle'
 ### Evaluatioin
 **cityscapes dataset**
 
-    python -u tools/analysis_tools/test_robustness.py configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg.py /home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg/epoch_1.pth --out /home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg/test_robustness_result_1epoch.pkl --corruptions benchmark --eval bbox
+    python -u tools/analysis_tools/test_robustness.py configs/OA-DG/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg.py /home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg/epoch_2.pth --out /home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg/test_robustness_result_2epoch.pkl --corruptions benchmark --eval bbox
 ---
 ## Reference
 [GitHub - AmingWu/Single-DGOD](https://github.com/AmingWu/Single-DGOD)\
