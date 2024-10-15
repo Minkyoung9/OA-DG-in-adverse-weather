@@ -129,3 +129,5 @@ command_*.sh
 tools/wandb/
 vis/
 wandb/
+configs/OA-DG/yolov5/
+configs/OA-DG/_base_/models/

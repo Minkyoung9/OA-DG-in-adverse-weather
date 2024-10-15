@@ -73,7 +73,14 @@ def main():
         ]:
             eval_kwargs.pop(key, None)
         eval_kwargs.update(dict(metric=args.eval, **kwargs))
-        print(dataset.evaluate(outputs, **eval_kwargs))
+        eval_result = dataset.evaluate(outputs, **eval_kwargs)
+
+        # Print eval result
+        print(eval_result)
+
+        # Save result as JSON file
+        with open('evaluation_results.json','w') as f:
+            json.dump(eval_result, f)
 
 
 if __name__ == '__main__':
