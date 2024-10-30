@@ -200,12 +200,15 @@ def tpfp_default(det_bboxes,
 
     # an indicator of ignored gts
     gt_ignore_inds = np.concatenate(
-        (np.zeros(gt_bboxes.shape[0], dtype=np.bool),
-         np.ones(gt_bboxes_ignore.shape[0], dtype=np.bool)))
+        (np.zeros(gt_bboxes.shape[0], dtype=np.bool_),  # dtype=np.bool -> np.bool_(New numpy version)
+         np.ones(gt_bboxes_ignore.shape[0], dtype=np.bool_)))
     # stack gt_bboxes and gt_bboxes_ignore for convenience
     gt_bboxes = np.vstack((gt_bboxes, gt_bboxes_ignore))
 
-    num_dets = det_bboxes.shape[0]
+    print(f"det_bboxes: {det_bboxes}")
+    print(f"type(det_bboxes): {type(det_bboxes)}")
+
+    num_dets = det_bboxes.shape[0] # Error occured!
     num_gts = gt_bboxes.shape[0]
     if area_ranges is None:
         area_ranges = [(None, None)]
@@ -342,6 +345,9 @@ def eval_map(det_results,
     Returns:
         tuple: (mAP, [dict, dict, ...])
     """
+    print(f"det_results: {det_results}")
+    print(f"annotations: {annotations}")
+
     assert len(det_results) == len(annotations)
     if not use_legacy_coordinate:
         extra_length = 0.

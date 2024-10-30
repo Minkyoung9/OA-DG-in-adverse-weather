@@ -275,6 +275,7 @@ def main():
                     # TODO: hard coded "1", we assume that the first step is
                     # loading images, which needs to be fixed in the future
                     test_data_cfg['pipeline'].insert(1, corruption_trans)
+
             elif args.load_dataset == 'corrupted':
                 if '/cityscapes/' in test_data_cfg['img_prefix']:
                     test_data_cfg['img_prefix'] = test_data_cfg['img_prefix'].replace('cityscapes', 'cityscapes-c')
@@ -287,7 +288,7 @@ def main():
                 elif '/coco-c/' in test_data_cfg['img_prefix']:
                     test_data_cfg['img_prefix'] = f"{test_data_cfg['img_prefix']}{corruption}/{corruption_severity}/"
                 else:
-                    if not 'VOCdevkit' in test_data_cfg['img_prefix']:
+                    if not 'cityscapes' in test_data_cfg['img_prefix']:
                         raise NotImplementedError(
                             "set load_dataset as 'corrupted' but use original dataset.")
             else:
@@ -331,9 +332,13 @@ def main():
                 elif '/VOCdevkit-C/' in data_loader.dataset.img_prefix:
                     data_loader.dataset.img_prefix = f"{data_loader.dataset.img_prefix}{corruption}/{corruption_severity}/"
                     data_loader.dataset.use_voc_c = True
+                elif '/cityscapes-c/' in data_loader.dataset.img_prefix:
+                    data_loader.dataset.img_prefix = f"{data_loader.dataset.img_prefix}{corruption}/{corruption_severity}/"
+                    data_loader.dataset.use_voc_c = True
+                    
 
             if not distributed:
-                model = MMDataParallel(model, device_ids=[0])
+                model = MMDataParallel(model, device_ids=[4])
                 show_dir = args.show_dir
                 if show_dir is not None:
                     show_dir = osp.join(show_dir, corruption)

@@ -348,7 +348,7 @@ class CocoDataset(CustomDataset):
                 the json filepaths, tmp_dir is the temporal directory created \
                 for saving json files when jsonfile_prefix is not specified.
         """
-        assert isinstance(results, list), 'results must be a list'
+        assert isinstance(results, list), f'results must be a list. {results}'
         assert len(results) == len(self), (
             'The length of results is not equal to the dataset len: {} != {}'.
             format(len(results), len(self)))
@@ -412,8 +412,10 @@ class CocoDataset(CustomDataset):
         if metric_items is not None:
             if not isinstance(metric_items, list):
                 metric_items = [metric_items]
-
-        result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
+        if isinstance(results,dict):
+            result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
+        else:
+            result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
 
         eval_results = OrderedDict()
         cocoGt = self.coco

@@ -16,6 +16,7 @@ train_pipeline = [
 ]
 test_pipeline = [
     dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations', with_bbox=True), # For evaluation
     dict(
         type='MultiScaleFlipAug',
         img_scale=(2048, 1024),
@@ -44,7 +45,7 @@ data = dict(
     val=dict(
         type=dataset_type,
         ann_file=data_root +
-        'annotations/instancesonly_filtered_gtFine_val.json',
+            'annotations/instancesonly_filtered_gtFine_val.json',
         img_prefix=data_root + 'leftImg8bit/val/',
         pipeline=test_pipeline),
     test=dict(
