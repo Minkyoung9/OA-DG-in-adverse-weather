@@ -200,7 +200,6 @@ def plot_confusion_matrix(confusion_matrix,
         axis='x', bottom=False, top=True, labelbottom=False, labeltop=True)
     plt.setp(
         ax.get_xticklabels(), rotation=45, ha='left', rotation_mode='anchor')
-
     # draw confution matrix value
     for i in range(num_classes):
         for j in range(num_classes):

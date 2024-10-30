@@ -81,6 +81,7 @@ def parse_args():
 
 
 def save_data(data_loader, out_dir=None):
+    # Determine dataset type based on the image prefix
     if 'cityscapes' in data_loader.dataset.img_prefix:
         dataset_type = 'cityscapes'
     elif 'coco' in data_loader.dataset.img_prefix:
@@ -88,21 +89,27 @@ def save_data(data_loader, out_dir=None):
     elif 'VOCdevkit' in data_loader.dataset.img_prefix:
         dataset_type = 'pascal_voc'
     else:
-        raise TypeError
+        raise TypeError("Unknown dataset type.")
 
+    # Iterate through the data loader
     for i, data in enumerate(data_loader):
+        print(data['img_metas'])
         img_metas = data['img_metas'].data[0]
         ori_filename = img_metas[0]['ori_filename']
         fn_ = ori_filename.split("/")
+        
+        # Create the output directory if it does not exist
         if len(fn_) > 1:
             directory_name = '/'.join(fn_[:-1])
             if not os.path.exists(f"{out_dir}/{directory_name}"):
                 os.makedirs(f"{out_dir}/{directory_name}")
-        save_path = f'{out_dir}/{ori_filename}'
-
+                
+        # Prepare the save path and convert to .png if necessary
+        save_path = f'{out_dir}/{directory_name}/{ori_filename}'
         if '.jpg' in save_path:
             save_path = save_path.replace('.jpg', '.png')
 
+        # Convert image tensor to PIL Image and save it
         img_tensor = data['img']
         img_vis = np.asarray(img_tensor[0], dtype=np.uint8)
         img = PIL.Image.fromarray(img_vis)
@@ -209,7 +216,7 @@ def main():
             dataset = build_dataset(test_data_cfg)
             data_loader = build_dataloader(
                 dataset,
-                samples_per_gpu=2,
+                samples_per_gpu=1,
                 workers_per_gpu=args.workers,
                 dist=distributed,
                 shuffle=False)

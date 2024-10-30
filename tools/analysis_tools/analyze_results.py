@@ -185,7 +185,7 @@ def main():
     cfg.data.test.test_mode = True
 
     cfg.data.test.pop('samples_per_gpu', 0)
-    cfg.data.test.pipeline = get_loading_pipeline(cfg.data.train.pipeline)
+    cfg.data.test.pipeline = get_loading_pipeline(cfg.data.test.pipeline)
     dataset = build_dataset(cfg.data.test)
     outputs = mmcv.load(args.prediction_path)
 
