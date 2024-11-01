@@ -4,7 +4,7 @@ import numpy as np
 
 # 경로 설정 및 corruptions, severity 리스트
 pkl_file_path = "/home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg2/test_robustness_result_2epoch_results.pkl"
-csv_file_path = "/home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg2/output_result_file/cityscapes-c_results.csv"
+csv_file_path = "/home/intern/minkyoung/dataset/cityscapes/faster_rcnn_r50_fpn_1x_cityscapes_oadg2/output_result_file/cityscapes-c_oadg_results.csv"
 corruptions = [
     'gaussian_noise', 'shot_noise', 'impulse_noise', 'defocus_blur',
     'glass_blur', 'motion_blur', 'zoom_blur', 'snow', 'frost', 'fog',
@@ -36,6 +36,7 @@ with open(csv_file_path, mode='w', newline='') as file:
         aps = []
         for sev in severity[1:]:  # severity 0 제외
             aps.append(results[corruption][sev]['bbox']['AP'])
+        writer.writerow([f"{ap:.3f}" for ap in aps])
         mAP = np.mean(aps)  # mAP 계산
         map_values.append(mAP)  # mAP 값을 리스트에 저장
 

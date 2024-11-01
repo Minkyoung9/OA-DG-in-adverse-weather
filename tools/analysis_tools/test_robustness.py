@@ -125,7 +125,7 @@ def parse_args():
     parser.add_argument(
         '--iou-thr',
         type=float,
-        default=0.5,
+        default=0.6,
         help='IoU threshold for pascal voc evaluation')
     parser.add_argument(
         '--summaries',
@@ -281,7 +281,7 @@ def main():
                     test_data_cfg['img_prefix'] = test_data_cfg['img_prefix'].replace('cityscapes', 'cityscapes-c')
                     test_data_cfg['img_prefix'] = f"{test_data_cfg['img_prefix']}{corruption}/{corruption_severity}/"
                 elif '/cityscapes-c/' in test_data_cfg['img_prefix']:
-                    test_data_cfg['img_prefix'] = f"{test_data_cfg['img_prefix']}{corruption}/{corruption_severity}/"
+                    test_data_cfg['img_prefix'] = f"{test_data_cfg['img_prefix']}/"
                 elif '/coco/' in test_data_cfg['img_prefix']:
                     test_data_cfg['img_prefix'] = test_data_cfg['img_prefix'].replace('coco', 'coco-c')
                     test_data_cfg['img_prefix'] = f"{test_data_cfg['img_prefix']}{corruption}/{corruption_severity}/"
