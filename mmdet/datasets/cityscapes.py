@@ -19,8 +19,9 @@ from .coco import CocoDataset
 
 @DATASETS.register_module()
 class CityscapesDataset(CocoDataset):
-    # CLASSES = ('person', 'car', 'truck', 'bus', 'motorcycle', 'bicycle')
-    CLASSES = ('person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle','bicycle')
+    CLASSES = ('person', 'car', 'truck', 'bus', 'motorcycle', 'bicycle')
+    #CLASSES = ('person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle','bicycle')
+    
     def _filter_imgs(self, min_size=32):
         """Filter images too small or without ground truths."""
         valid_inds = []
@@ -40,8 +41,6 @@ class CityscapesDataset(CocoDataset):
             ann_ids = self.coco.getAnnIds(imgIds=[img_id])
             ann_info = self.coco.loadAnns(ann_ids)
             all_iscrowd = all([_['iscrowd'] for _ in ann_info])
-            ann_info['segm_file'] = img_info['file_name'].replace('_leftImg8bit.png', '_gtFine_labelIds.png')
-            
             if self.filter_empty_gt and (self.img_ids[i] not in ids_in_cat
                                          or all_iscrowd):
                 continue
