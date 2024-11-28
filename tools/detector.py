@@ -28,13 +28,13 @@ def process_images(img_folder, model, score_thr=0.3, device='cuda:0'):
         result = inference_detector(model, img_path)  # 이미지 처리
         
         # 결과를 시각화하고 out_file로 저장
-        out_file = os.path.join(img_folder,'results', f"output_{img_file}")  # output 경로 설정
+        #out_file = os.path.join(img_folder,'results', f"output_{img_file}")  # output 경로 설정
         show_result_pyplot(
             model, 
             img_path, 
             result, 
             score_thr=score_thr, 
-            out_file=out_file  # out_file을 전달
+            out_file=None  # out_file을 전달
         )
 
 async def async_process_images(img_folder, model, score_thr=0.3, device='cuda:0'):

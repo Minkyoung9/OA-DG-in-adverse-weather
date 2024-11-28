@@ -15,6 +15,8 @@ from .voc import VOCDataset
 from .sdgod import SdgodDataset
 from .wider_face import WIDERFaceDataset
 from .xml_style import XMLDataset
+from .BDD100k import bdd100kDataset
+from .DAWN import DAWNDataset
 
 __all__ = [
     'CustomDataset', 'XMLDataset', 'CocoDataset', 'DeepFashionDataset',
@@ -23,5 +25,6 @@ __all__ = [
     'DistributedSampler', 'build_dataloader', 'ConcatDataset', 'RepeatDataset',
     'ClassBalancedDataset', 'WIDERFaceDataset', 'DATASETS', 'PIPELINES',
     'build_dataset', 'replace_ImageToTensor', 'get_loading_pipeline',
-    'NumClassCheckHook', 'CocoPanopticDataset', 'MultiImageMixDataset'
+    'NumClassCheckHook', 'CocoPanopticDataset', 'MultiImageMixDataset','bdd100kDataset',
+    'DAWNDataset'
 ]
